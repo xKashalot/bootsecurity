@@ -6,14 +6,16 @@
 </head>
 <body>
 
-<tr> id </tr>
+<form th:method="GET" th:object="${user}">
+<label> id </label>
 <p th:text="${user.getId()}" />
-<tr> name </tr>
+<label> name </label>
 <p th:text="${user.getUsername()}" />
-<tr> last name </tr>
+<label> last name </label>
 <p th:text="${user.getLastname()}" />
-<tr> city </tr>
+<label> city </label>
 <p th:text="${user.getCity()}" />
+</form>
 
 <form th:method="POST" th:action="@{/admin/edit (id=${user.getId()})}" th:object="${user}">
     <input type="submit" value="Edit" />
