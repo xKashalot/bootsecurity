@@ -27,6 +27,12 @@ public class UsersController {
         return "/index";
     }
 
+    @GetMapping("/login")
+    public String get(Model model) {
+        model.addAttribute("title", "Форма входа");
+        return "login";
+    }
+
     @PostMapping("/user/view")
     public String showById(@RequestParam("id") long id, Model model) {
         model.addAttribute("user", userService.showUser(id));
