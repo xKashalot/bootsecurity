@@ -24,21 +24,22 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
+    private User userFromDB;
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    RoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
     public void setRoleRepository(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
 
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public void setbCryptPasswordEncoder(@Lazy BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -58,13 +59,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public boolean save(User user) {
-        User userFromDB = userRepository.findByUsername(user.getUsername());
+        userFromDB = userRepository.findByUsername(user.getUsername());
 
         if (userFromDB != null) {
             return false;
         }
-
-        user.setRoles(Collections.singleton(roleRepository.getById(1L)));
+        user.setRoles(user.getRoles());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;

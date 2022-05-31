@@ -21,14 +21,38 @@ public class UsersController {
         this.userService = userService;
     }
 
-    @GetMapping()
+    @GetMapping("/user")
+    public String user(Model model) {
+        model.addAttribute("users", userService.users());
+        return "/index";
+    }
+
+    @GetMapping("/admin")
+    public String admin(Model model) {
+        model.addAttribute("users", userService.users());
+        return "/index";
+    }
+
+    @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("users", userService.users());
         return "/index";
     }
 
+    @GetMapping("/admin/create")
+    public String create(Model model) {
+        model.addAttribute("userForm", new User());
+        return "create";
+    }
+
     @GetMapping("/login")
-    public String get(Model model) {
+    public String in(Model model) {
+        model.addAttribute("title", "Форма входа");
+        return "login";
+    }
+
+    @GetMapping("/logout")
+    public String out(Model model) {
         model.addAttribute("title", "Форма входа");
         return "login";
     }

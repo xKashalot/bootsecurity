@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Registration</title>
+    <title>Creating</title>
 </head>
 
 <body>
@@ -18,13 +18,10 @@
     <br/>
     <input type="password" th:field="*{passwordConfirm}" placeholder="Password confirm" />
     <br/>
-    <input type="hidden" th:field="*{roles}" id="ROLE_USER"/>
+    <input type="text" th:field="*{roles}" placeholder="Role 1-user, 2-admin" />
+    <br/>
     <p/>
-    <button type="submit"> Registration </button>
-</form>
-
-<form th:method="GET" th:action="@{/}">
-    <input type="submit" value="Back"/>
+    <button type="submit"> Create </button>
 </form>
 
 </body>

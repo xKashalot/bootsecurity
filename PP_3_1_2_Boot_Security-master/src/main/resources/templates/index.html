@@ -16,8 +16,8 @@
         <th>Name</th>
         <th>Last Name</th>
         <th>City</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th >Edit</th>
+        <th sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
         <th>Solo view</th>
     </tr>
 
@@ -29,7 +29,7 @@
         <th> <form th:method="POST" th:action="@{/admin/edit (id=${user.getId()})}" th:object="${user}">
             <input type="submit" value="Edit" />
         </form></th>
-        <th> <form th:method="POST" th:action="@{/admin/?id={id} (id=${user.getId()})}">
+        <th sec:authorize="hasRole('ROLE_ADMIN')"> <form th:method="POST" th:action="@{/admin/?id={id} (id=${user.getId()})}">
             <input type="submit" value="Pls no" />
         </form> </th>
         <th> <form th:method="POST" th:action="@{/user/view (id=${user.getId()})}">
@@ -37,6 +37,12 @@
         </form> </th>
     </tr>
 </table>
+
+<br/>
+
+<form th:method="GET" th:action="@{/admin/create}">
+    <input type="submit" value="Create new" />
+</form>
 
 <br/>
 
